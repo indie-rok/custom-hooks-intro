@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Contact from "./Contact";
+import useApi from "./hooks/useApi";
+import useAuth from "./hooks/useAuth";
+import useCounter from "./hooks/useCounter";
 
-function App() {
+export default function App() {
+  const { number, setNumber } = useCounter();
+  const  token  = useAuth();
+
+  if(!token){
+    return <div>You need to login</div>
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      helllo {number}
+      <button
+        onClick={() => {
+          setNumber(2);
+        }}
+      >
+        Click
+      </button>
+      <Contact />
     </div>
   );
 }
-
-export default App;
